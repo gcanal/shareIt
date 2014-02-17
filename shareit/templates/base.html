@@ -1,0 +1,124 @@
+
+{% load static %}
+{% load i18n %}
+{# {% load fExtras %}  usefull for custom tags#}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> 
+   <!-- <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"> Fuck le bootstrap-->
+   <link href="{{ STATIC_URL }}css/shareit.css" rel="stylesheet" media="screen"> 
+   <title>{% block title %} {% trans "Share It ça casse des bites" %} {% endblock %}</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+{% block head %} {# if we want to personalize the head tag in other templates #} {% endblock %}
+</head>
+
+<body>
+<!--<div id="bodyWrapped"> -->
+<div id="bodyWrapped">
+	
+	
+{##############################################################  HEADER #############################################################}	
+{% block header %}
+  <header >
+	<p>
+	<a  href="{% url 'main.views.home' %}"><img src="{% static 'images/shareitHeader.png' %}" alt="" width="950" height="213"/></a>  
+	</p>
+	{% comment %}
+	<div id=languageSelector> 
+		{% if pageId != None %}
+			{% if LANGUAGE_CODE == 'fr' %} 
+				<a  id=language href="{% url 'main.views.activate' 'en' pageId %}"> English version </a> 
+			{% else %} 
+			<a  id=language href="{% url 'main.views.activate' 'fr' pageId %}"> Version française </a>
+			{% endif %}
+		{% endif %}
+	</div>
+	{% endcomment %}
+</header>
+{% endblock %}
+
+
+
+{% block pub %}	
+<div class="pub">
+	{% trans "Ici je glisse un petit message publicitaire" %}
+</div>
+{% endblock %}
+
+{###############################################################  NAV ###############################################################}
+	<nav > 	
+			{# <li ><a class={{pageId|isActive:0}} href="{% url 'main.views.home' %}">{% trans "Accueil" %}</a></li> #}
+			<li ><a class="actif" href="{% url 'main.views.home' %}">{% trans "Accueil" %}</a></li>
+			<li ><a class="actif" href="{% url 'main.views.home' %}">{% trans "Vers nulle part" %}</a></li>
+			<li ><a class="actif" href="{% url 'main.views.home' %}">{% trans "Vers ici" %}</a></li>
+	</nav>
+	
+<div id="main">		 
+{############################################################### MAIN ###############################################################}		 
+{% block contentUp %}
+{% endblock %} 
+
+{% block contentMiddle %}
+<h1>Le dormeur du val </h1>
+<p>C'est un trou de verdure où chante une rivière
+Accrochant follement aux herbes des haillons
+D'argent ; où le soleil, de la montagne fière,
+Luit : c'est un petit val qui mousse de rayons.
+</p><p>
+Un soldat jeune, bouche ouverte, tête nue,
+Et la nuque baignant dans le frais cresson bleu,
+Dort ; il est étendu dans l'herbe, sous la nue,
+Pâle dans son lit vert ou la lumière pleut.
+</p><p>
+Les pieds dans les glaïeuls, il dort. Souriant comme
+Sourirait un enfant malade, il fait un somme :
+Nature, berce-le chaudement : il a froid.
+</p><p>
+Les parfums ne font pas frissonner sa narine ;
+Il dort dans le soleil, la main sur sa poitrine
+Tranquille. Il a deux trous rouges au côté droit.
+</p>
+{% endblock %}
+
+
+{% block contentBottom %}
+{% endblock %}
+
+</div>  <!-- id="main" -->
+	
+{############################################################## ASIDE  ##############################################################}
+	<aside  >
+{% block headAside %}
+	<div id="headAside"> 
+		<a  href="{% url 'main.views.home' %}"> <img src="{% static 'images/cdelamerde.jpg' %}" alt="" width="160" /> </a>  <!--height="213" -->
+    </div>
+{% endblock %}
+{% block aside %}
+		<p> Clairement, nous sommes dans un esprit de remplissage pour faire du texte </p>
+		<p> Clairement, nous sommes dans un esprit de remplissage pour faire du texte </p>
+		<p> Clairement, nous sommes dans un esprit de remplissage pour faire du texte </p>
+{% endblock %}
+	</aside>
+</div>
+	
+{#############################################################  FOOTER ##############################################################}
+<footer>
+ <div class="footerwrapper">
+	<div class="footer1"><a href="{% url 'main.views.home' %}" ><i class="fa fa-h-square fa-lg"></i> Homepage </a></div>
+	<div class="footer1"><a href="#bodyWrapped" ><i class="fa fa-arrow-circle-up fa-lg"></i>{% trans "Vers ta mère" %}</a></div>
+	<div class="footer1"><a href="#bodyWrapped" ><i class="fa fa-arrow-circle-up fa-lg"></i>{% trans "Vers ton père" %}</a></div>
+	
+	 <div class="footer1">
+		<a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangoproject120x25_grey.gif" 
+		border="0" alt="A Django project." title="A Django project." /></a>
+	  </div>
+ </div>
+</footer>
+
+</body>
+
+</html>
+
+

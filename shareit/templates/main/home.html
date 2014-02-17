@@ -1,0 +1,61 @@
+ {% extends "base.html"%}
+{# template For the homePage#}
+ {% load static %} 
+
+
+{% block contentUp %} {# Taille du bloc 498px #}
+
+Ici nous sommes clairement sur la home page
+
+ {% endblock %}
+ 
+ 
+ 
+ 
+  
+{% comment %} 
+if request.method == 'POST':
+    bannedphraseform = BannedPhraseForm(request.POST, prefix='banned')
+    if bannedphraseform.is_valid():
+        bannedphraseform.save()
+else:
+    bannedphraseform = BannedPhraseForm(prefix='banned')
+
+if request.method == 'POST' and not bannedphraseform.is_valid():
+    expectedphraseform = ExpectedPhraseForm(request.POST, prefix='expected')
+    bannedphraseform = BannedPhraseForm(prefix='banned')
+    if expectedphraseform.is_valid():
+        expectedphraseform.save()
+else:
+    expectedphraseform = ExpectedPhraseForm(prefix='expected')
+
+	if request.method=='POST':
+		siginInform=SignInFormForm(request.POST,prefix='signin')
+		if signInform.is_valid():
+			titre=form.cleaned_data['titre'];paragraphe=form.cleaned_data['paragraphe'];legende=form.cleaned_data['legende'];
+			link=form.cleaned_data['link'];linkText=form.cleaned_data['linkText'];
+			
+			if lan=='fr':
+				sec.titre_fr=titre;sec.paragraphe_fr=paragraphe;sec.legende_fr=legende;sec.modifiedInFr=True;
+				sec.linkText_fr=linkText;sec.link=link;
+				sec.save(update_fields=['titre_fr','paragraphe_fr','legende_fr','modifiedInFr','link','linkText_fr'])
+			else:#lan='en'
+				sec.titre_en=titre;sec.paragraphe_en=paragraphe;sec.legende_en=legende;sec.modifiedInFr=False;sec.translated=True;
+				sec.linkText_en=linkText;sec.link=link;
+				sec.save(update_fields=['titre_en','paragraphe_en','legende_en','modifiedInFr','translated','link','linkText_en'])			
+			#redirecting to the startpage
+			return redirect(view_from_pageId(pageIdAsked))
+	else:#Get method
+		displayForm=True;
+		if lan == 'fr':
+			form=SectionTextForm(titre=sec.titre_fr,paragraphe=sec.paragraphe_fr,legende=sec.legende_fr,link=sec.link,linkText=sec.linkText_fr);
+		else:
+			form=SectionTextForm(titre=sec.titre_en,paragraphe=sec.paragraphe_en,legende=sec.legende_en,link=sec.link,linkText=sec.linkText_en)	 
+		return render(request,'website/websiteFormTemplate.html',locals())
+		
+		SignUpForm
+SignForm;
+"""
+	
+{% endcomment %} 
+
